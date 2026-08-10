@@ -1,0 +1,154 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  /**
+   * Light theme — a cool "grey · blue · purple" blend rather than stark
+   * white, so long sessions don't glare. The page canvas is a soft
+   * lavender-grey (hue 245, low saturation); cards float above it in a
+   * near-white with the same cool tint, giving gentle depth. Text is a
+   * deep cool ink, borders are soft periwinkle hairlines, and the brand
+   * purple stays the primary accent. All surfaces share hue ~245 so the
+   * chrome reads as one calm, modern system (Linear/Vercel-style cool
+   * paper) instead of a bright white sheet.
+   */
+  :root {
+    --background: 245 30% 96%;
+    --foreground: 245 25% 13%;
+    --card: 250 40% 99%;
+    --card-foreground: 245 25% 13%;
+    --popover: 250 40% 99%;
+    --popover-foreground: 245 25% 13%;
+    --primary: 262 83% 58%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 244 28% 92%;
+    --secondary-foreground: 245 22% 20%;
+    --muted: 244 26% 93%;
+    --muted-foreground: 245 14% 42%;
+    --accent: 255 40% 93%;
+    --accent-foreground: 258 30% 26%;
+    --destructive: 0 78% 58%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 244 24% 87%;
+    --input: 244 24% 88%;
+    --ring: 262 83% 58%;
+    --radius: 0.75rem;
+  }
+
+  /**
+   * Claude Code-inspired dark theme.
+   *
+   * Near-black neutral background with a very faint warm tint, low-
+   * saturation neutral text, soft hairline borders, and a warm orange
+   * primary accent (matching Claude's brand mark).
+   *
+   * Hue 28 (warm orange) on the primary; surfaces sit on hue 30 with
+   * extremely low saturation so the chrome reads as "dark paper" rather
+   * than a coloured cast.
+   */
+  .dark {
+    --background: 30 6% 7%;
+    --foreground: 30 12% 92%;
+    --card: 30 6% 9%;
+    --card-foreground: 30 12% 92%;
+    --popover: 30 6% 9%;
+    --popover-foreground: 30 12% 92%;
+    --primary: 24 95% 56%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 30 5% 14%;
+    --secondary-foreground: 30 12% 92%;
+    --muted: 30 5% 13%;
+    --muted-foreground: 30 8% 62%;
+    --accent: 30 6% 16%;
+    --accent-foreground: 30 12% 92%;
+    --destructive: 0 65% 50%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 30 6% 18%;
+    --input: 30 6% 16%;
+    --ring: 24 95% 56%;
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  html {
+    -webkit-text-size-adjust: 100%;
+    scroll-behavior: smooth;
+  }
+
+  /*
+   * Platform density: bake in the "75% browser zoom" viewing experience
+   * as the default. Everything is sized in rem, so lowering the root
+   * font-size scales type, paddings, and card widths together — same
+   * effect as zooming out, but consistent for every visitor and with
+   * crisp 1px borders. 16px × 0.75 = 12px on desktop; tablets get a
+   * middle step; phones keep the full 16px base where compact sizing
+   * would hurt readability.
+   */
+  @media (min-width: 768px) {
+    html {
+      font-size: 13px;
+    }
+  }
+  @media (min-width: 1024px) {
+    html {
+      font-size: 12px;
+    }
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+
+  /* Honor system preference: drop animation/transition durations to ~0.
+     Skipping transforms entirely would break some Radix portals, so we just
+     make them effectively instant. */
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.001ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.001ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+
+  /* Pleasant focus ring everywhere — tailwind's default is too subtle. */
+  :where(button, [role="button"], a, input, textarea, select):focus-visible {
+    @apply outline-none ring-2 ring-ring ring-offset-2 ring-offset-background;
+  }
+}
+
+@layer utilities {
+  .bg-grid {
+    background-image: linear-gradient(hsl(var(--border) / 0.5) 1px, transparent 1px),
+      linear-gradient(to right, hsl(var(--border) / 0.5) 1px, transparent 1px);
+    background-size: 48px 48px;
+  }
+
+  .bg-radial-fade {
+    background-image: radial-gradient(
+      ellipse at top,
+      hsl(var(--primary) / 0.15),
+      transparent 60%
+    );
+  }
+
+  .text-gradient {
+    @apply bg-clip-text text-transparent;
+    background-image: linear-gradient(
+      120deg,
+      hsl(var(--foreground)) 0%,
+      hsl(var(--primary)) 50%,
+      hsl(var(--foreground)) 100%
+    );
+  }
+
+  .mask-fade-x {
+    mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+  }
+}
