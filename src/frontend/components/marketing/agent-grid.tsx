@@ -9,7 +9,7 @@ import { cn } from "@/shared/utils";
  */
 export function AgentGrid() {
   return (
-    <section id="agents" className="py-24 md:py-32">
+    <section id="agents" className="parallax-section py-24 md:py-32">
       <div className="container">
         <div className="mx-auto mb-16 max-w-2xl text-center">
           <p className="mb-3 text-xs font-medium uppercase tracking-widest text-primary">
@@ -26,20 +26,33 @@ export function AgentGrid() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
+        <div className="agent-card-grid grid grid-cols-1 gap-3 md:grid-cols-2 lg:grid-cols-3">
           {AGENTS.map((agent) => {
             const Icon = agent.icon;
             return (
-              <article
+              <div
                 key={agent.id}
-                className="group relative overflow-hidden rounded-2xl border bg-card p-6 transition-all duration-300 hover:-translate-y-0.5 hover:border-primary/30 hover:shadow-xl hover:shadow-primary/5"
+                className="agent-card group relative block h-full w-full p-2 transition-opacity duration-300"
               >
+                <span
+                  aria-hidden
+                  className="absolute inset-0 block h-full w-full rounded-3xl bg-primary/10 opacity-0 transition-opacity duration-150 group-hover:opacity-100 dark:bg-primary/20"
+                />
+                <article className="relative z-20 h-full overflow-hidden rounded-2xl border bg-card p-6 transition-all duration-300 group-hover:border-primary/30 group-hover:bg-background group-hover:shadow-xl group-hover:shadow-primary/10">
                 <div
                   aria-hidden
                   className={cn(
                     "pointer-events-none absolute inset-0 -z-10 bg-gradient-to-br opacity-40 transition-opacity duration-300 group-hover:opacity-100",
                     agent.accent
                   )}
+                />
+                <div
+                  aria-hidden
+                  className="pointer-events-none absolute inset-0 -z-10 rounded-2xl bg-[radial-gradient(circle_at_20%_20%,hsl(var(--primary)/0.16),transparent_55%)] opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+                />
+                <div
+                  aria-hidden
+                  className="pointer-events-none absolute inset-y-0 left-0 w-1/2 -translate-x-full -skew-x-12 bg-gradient-to-r from-transparent via-white/20 to-transparent transition-transform duration-700 group-hover:translate-x-[280%] dark:via-white/10"
                 />
                 <div className="mb-4 flex items-center justify-between">
                   <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-background/90 shadow-sm ring-1 ring-border transition-transform duration-300 group-hover:scale-110">
@@ -60,7 +73,8 @@ export function AgentGrid() {
                 <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
                   {agent.description}
                 </p>
-              </article>
+                </article>
+              </div>
             );
           })}
         </div>

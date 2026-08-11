@@ -5,7 +5,7 @@ import { SITE_NAME } from "@/shared/site";
 
 export function Cta() {
   return (
-    <section className="relative overflow-hidden py-24 md:py-32">
+    <section className="parallax-section relative overflow-hidden py-24 md:py-32">
       <div
         aria-hidden
         className="pointer-events-none absolute inset-0 -z-10 bg-gradient-to-br from-primary/10 via-background to-fuchsia-500/5"

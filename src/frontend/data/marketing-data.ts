@@ -68,7 +68,7 @@ export const AGENTS: AgentCard[] = [
     description:
       "Locks onto your site, finds the subreddits that matter, and drafts human replies for threads where your buyers already hang out.",
     icon: RedditLogo,
-    accent: "from-orange-500/20 to-red-500/10",
+    accent: "from-violet-500/20 to-purple-500/10",
   },
   {
     id: "hn",
@@ -77,7 +77,7 @@ export const AGENTS: AgentCard[] = [
     description:
       "Watches HN for threads your product belongs in and drafts comments that do not read like marketing.",
     icon: HackerNewsLogo,
-    accent: "from-amber-500/20 to-orange-500/10",
+    accent: "from-purple-500/20 to-fuchsia-500/10",
   },
   {
     id: "x",
@@ -140,7 +140,7 @@ export const AGENTS: AgentCard[] = [
     description:
       "GA4 traffic, channels, devices and countries, matched per-site so multi-site workspaces never mix numbers.",
     icon: GoogleAnalyticsLogo,
-    accent: "from-yellow-500/20 to-amber-500/10",
+    accent: "from-indigo-500/20 to-purple-500/10",
   },
 ];
 

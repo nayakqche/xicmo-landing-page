@@ -8,7 +8,7 @@ import { FAQS } from "@/frontend/data/marketing-data";
 
 export function Faq() {
   return (
-    <section className="bg-muted/20 py-24 md:py-32">
+    <section className="parallax-section bg-muted/20 py-24 md:py-32">
       <div className="container">
         <div className="mx-auto mb-12 max-w-2xl text-center">
           <p className="mb-3 text-xs font-medium uppercase tracking-widest text-primary">
@@ -27,10 +27,10 @@ export function Faq() {
                 value={`item-${idx}`}
                 className="px-4 last:border-b-0"
               >
-                <AccordionTrigger className="text-left text-base">
+                <AccordionTrigger className="text-left text-base no-underline hover:no-underline">
                   {item.q}
                 </AccordionTrigger>
-                <AccordionContent className="pb-4 pr-6 text-sm leading-relaxed">
+                <AccordionContent className="pb-5 pr-6 text-sm leading-relaxed transition-all duration-300 ease-out">
                   {item.a}
                 </AccordionContent>
               </AccordionItem>

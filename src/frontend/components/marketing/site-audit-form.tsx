@@ -211,7 +211,7 @@ function AuditResultCard({ result }: { result: SuccessResponse }) {
     score >= 80
       ? "text-emerald-500"
       : score >= 50
-        ? "text-amber-500"
+        ? "text-purple-500"
         : "text-red-500";
 
   return (
@@ -289,7 +289,7 @@ function AuditResultCard({ result }: { result: SuccessResponse }) {
                         (i.severity === "high"
                           ? "bg-red-500"
                           : i.severity === "medium"
-                            ? "bg-amber-500"
+                            ? "bg-purple-500"
                             : "bg-slate-400")
                       }
                       aria-hidden
@@ -420,7 +420,7 @@ function Mini({ label, value }: { label: string; value: number | null }) {
       : value >= 90
         ? "text-emerald-500"
         : value >= 50
-          ? "text-amber-500"
+          ? "text-purple-500"
           : "text-red-500";
   return (
     <div className="text-center">

@@ -70,14 +70,14 @@ export function FacebookLogo({ className }: LogoProps) {
 }
 
 /**
- * Reddit "Snoo" mark — solid Reddit orange (#FF4500) circle with the
+ * Reddit "Snoo" mark on a Xicmo-purple circle with the
  * antenna + face cutouts. Same proportions as the official Reddit brand
  * mark; derived from the skill-icons Reddit PR.
  */
 export function RedditLogo({ className }: LogoProps) {
   return (
     <svg viewBox="0 0 24 24" className={className} aria-hidden focusable="false">
-      <circle cx="12" cy="12" r="12" fill="#FF4500" />
+      <circle cx="12" cy="12" r="12" fill="#7C3AED" />
       <path
         fill="#fff"
         d="M20 12c0-.97-.79-1.76-1.76-1.76-.47 0-.9.19-1.21.49-1.2-.86-2.84-1.41-4.66-1.48l.79-3.73 2.6.55c.03.66.57 1.18 1.24 1.18.68 0 1.24-.55 1.24-1.24 0-.68-.55-1.24-1.24-1.24-.48 0-.9.28-1.1.69l-2.9-.62a.27.27 0 0 0-.32.2l-.88 4.13c-1.84.05-3.51.61-4.73 1.47A1.76 1.76 0 0 0 4 12c0 .73.45 1.36 1.08 1.62-.03.18-.04.37-.04.56C5.04 16.99 8.16 19 12 19s6.96-2.01 6.96-4.82c0-.19-.01-.38-.04-.56A1.76 1.76 0 0 0 20 12zm-11.5 1.25c0-.69.56-1.25 1.25-1.25s1.25.56 1.25 1.25-.56 1.25-1.25 1.25-1.25-.56-1.25-1.25zm6.74 3.25c-.83.83-2.41.9-2.87.9-.47 0-2.05-.06-2.87-.9a.31.31 0 0 1 0-.44.31.31 0 0 1 .44 0c.52.52 1.64.71 2.43.71.79 0 1.91-.18 2.43-.71a.31.31 0 0 1 .44 0 .31.31 0 0 1 0 .44zm-.24-2c-.69 0-1.25-.56-1.25-1.25s.56-1.25 1.25-1.25 1.25.56 1.25 1.25-.56 1.25-1.25 1.25z"
@@ -87,12 +87,12 @@ export function RedditLogo({ className }: LogoProps) {
 }
 
 /**
- * Hacker News "Y" mark — orange square with white "Y".
+ * Hacker News "Y" mark on a purple square with white "Y".
  */
 export function HackerNewsLogo({ className }: LogoProps) {
   return (
     <svg viewBox="0 0 24 24" className={className} aria-hidden focusable="false">
-      <rect width="24" height="24" rx="3" fill="#FF6600" />
+      <rect width="24" height="24" rx="3" fill="#8B5CF6" />
       <path
         fill="#fff"
         d="M9.4 6h2.2l1.4 3.2L14.4 6h2.2l-2.6 5.5V18h-2.4v-6.5z"
@@ -148,7 +148,7 @@ export function GeoLogo({ className }: LogoProps) {
 
 /**
  * Content Writer — a fountain-pen nib (with breather hole + slit) on an
- * amber→orange gradient tile, plus a small AI spark. Reads as "premium
+ * violet-to-purple gradient tile, plus a small AI spark. Reads as "premium
  * writing" at 16px instead of the old generic diagonal pencil.
  */
 export function ContentLogo({ className }: LogoProps) {
@@ -156,8 +156,8 @@ export function ContentLogo({ className }: LogoProps) {
     <svg viewBox="0 0 24 24" className={className} aria-hidden focusable="false">
       <defs>
         <linearGradient id="content-grad" x1="0" y1="0" x2="24" y2="24" gradientUnits="userSpaceOnUse">
-          <stop offset="0%" stopColor="#F59E0B" />
-          <stop offset="100%" stopColor="#EA580C" />
+          <stop offset="0%" stopColor="#A78BFA" />
+          <stop offset="100%" stopColor="#7C3AED" />
         </linearGradient>
       </defs>
       <rect width="24" height="24" rx="6" fill="url(#content-grad)" />
@@ -212,8 +212,7 @@ export function BacklinkLogo({ className }: LogoProps) {
 export const RedditSalesLogo = RedditLogo;
 
 /**
- * Google Analytics 4 mark — the official orange-yellow bars, matching the
- * bundled /public/google-analytics.svg used on the connect card.
+ * Google Analytics 4 mark adapted to the Xicmo purple palette.
  */
 export function GoogleAnalyticsLogo({ className }: LogoProps) {
   return (
@@ -225,11 +224,11 @@ export function GoogleAnalyticsLogo({ className }: LogoProps) {
       preserveAspectRatio="xMidYMid"
     >
       <path
-        fill="#F9AB00"
+        fill="#A78BFA"
         d="M256.003159,247.933017 C256.055907,258.030289 251.77298,267.664804 244.241349,274.390297 C236.709718,281.11579 226.653817,284.285366 216.626905,283.094249 C198.58347,280.424364 185.360959,264.722632 185.800619,246.488035 L185.800619,36.8452103 C185.364944,18.5907614 198.619678,2.88144681 216.687112,0.238996295 C226.704325,-0.933476157 236.743571,2.24455542 244.261279,8.9678962 C251.778988,15.691237 256.053811,25.3147619 256.003159,35.4002282 L256.003159,247.933017 Z"
       />
       <path
-        fill="#E37400"
+        fill="#7C3AED"
         d="M35.1010243,213.193238 C54.4867848,213.193238 70.2020487,228.908502 70.2020487,248.294263 C70.2020487,267.680023 54.4867848,283.395287 35.1010243,283.395287 C15.7152639,283.395287 0,267.680023 0,248.294263 C0,228.908502 15.7152639,213.193238 35.1010243,213.193238 Z M127.459466,106.806429 C107.981896,107.874068 92.8698765,124.212107 93.3217628,143.713681 L93.3217628,237.998765 C93.3217628,263.58699 104.580582,279.120548 121.077461,282.431965 C131.434034,284.530959 142.185473,281.860819 150.356699,275.160414 C158.527925,268.460009 163.252393,258.439904 163.222912,247.872809 L163.222912,142.088076 C163.240039,132.641687 159.462041,123.584285 152.737293,116.950107 C146.012546,110.315928 136.904752,106.661084 127.459466,106.806429 Z"
       />
     </svg>
@@ -237,7 +236,7 @@ export function GoogleAnalyticsLogo({ className }: LogoProps) {
 }
 
 /**
- * Google Search Console 2025 mark — colorful bars + yellow magnifier with a
+ * Google Search Console 2025 mark — colorful bars + purple magnifier with a
  * small red overlap arc. Mirrors the bundled /public/google-search-console.svg
  * used on the connect card. The clipPath id is namespaced so multiple copies
  * on one page (sidebar + card) don't collide.
@@ -263,11 +262,11 @@ export function GoogleSearchConsoleLogo({ className }: LogoProps) {
         y1="184"
         x2="28"
         y2="212"
-        stroke="#FBBC04"
+        stroke="#A78BFA"
         strokeWidth="22"
         strokeLinecap="round"
       />
-      <circle cx="88" cy="152" r="40" stroke="#FBBC04" strokeWidth="18" />
+      <circle cx="88" cy="152" r="40" stroke="#A78BFA" strokeWidth="18" />
       <circle
         cx="88"
         cy="152"

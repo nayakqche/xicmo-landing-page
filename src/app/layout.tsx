@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Inter, JetBrains_Mono } from "next/font/google";
 import { Toaster } from "sonner";
 import { ThemeProvider } from "@/app/theme-provider";
+import { AgentationHelper } from "@/frontend/components/agentation-helper";
 import { PRODUCT_LINE, SITE_NAME } from "@/shared/site";
 import "./globals.css";
 
@@ -53,6 +54,7 @@ export default function RootLayout({
       <body className={`${inter.variable} ${mono.variable} font-sans antialiased`}>
         <ThemeProvider>
           {children}
+          <AgentationHelper />
           <Toaster position="top-center" richColors />
         </ThemeProvider>
       </body>

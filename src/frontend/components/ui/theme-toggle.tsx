@@ -1,8 +1,9 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { useTheme } from "next-themes";
 import { Monitor, Moon, Sun } from "lucide-react";
+import { flushSync } from "react-dom";
 import { Button } from "@/frontend/components/ui/button";
 import { cn } from "@/shared/utils";
 
@@ -15,12 +16,94 @@ const META: Record<Mode, { label: string; icon: typeof Sun }> = {
   system: { label: "System", icon: Monitor },
 };
 
-/** Cycles light → dark → system → light. */
+type ViewTransitionDocument = Document & {
+  startViewTransition?: (callback: () => void) => {
+    ready: Promise<void>;
+    finished: Promise<void>;
+  };
+};
+
+function triangleClipPaths(
+  rect: DOMRect,
+  viewportWidth: number,
+  viewportHeight: number
+) {
+  const cx = ((rect.left + rect.width / 2) / viewportWidth) * 100;
+  const cy = ((rect.top + rect.height / 2) / viewportHeight) * 100;
+  const spread = 150;
+
+  return [
+    `polygon(${cx}% ${cy}%, ${cx}% ${cy}%, ${cx}% ${cy}%)`,
+    `polygon(${cx}% ${cy - spread}%, ${cx - spread}% ${cy + spread}%, ${cx + spread}% ${cy + spread}%)`,
+  ] as const;
+}
+
+/** Header toggle uses a triangle View Transition between light and dark. */
 export function ThemeToggle({ className }: { className?: string }) {
-  const { theme, setTheme, resolvedTheme } = useTheme();
+  const { setTheme, resolvedTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
+  const buttonRef = useRef<HTMLButtonElement>(null);
+  const transitionRef = useRef(false);
 
   useEffect(() => setMounted(true), []);
+
+  const shownMode = (resolvedTheme as "light" | "dark") ?? "light";
+  const nextMode = shownMode === "dark" ? "light" : "dark";
+
+  const handleToggle = useCallback(() => {
+    if (!mounted || transitionRef.current) return;
+
+    const root = document.documentElement;
+    const viewTransitionDocument = document as ViewTransitionDocument;
+    const applyTheme = () => {
+      root.classList.toggle("dark", nextMode === "dark");
+      root.style.colorScheme = nextMode;
+      setTheme(nextMode);
+    };
+
+    if (
+      !buttonRef.current ||
+      typeof viewTransitionDocument.startViewTransition !== "function" ||
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches
+    ) {
+      applyTheme();
+      return;
+    }
+
+    transitionRef.current = true;
+    root.dataset.magicuiThemeVt = "active";
+    root.style.setProperty("--magicui-theme-toggle-vt-duration", "650ms");
+
+    const rect = buttonRef.current.getBoundingClientRect();
+    const transition = viewTransitionDocument.startViewTransition(() => {
+      flushSync(applyTheme);
+    });
+
+    transition.ready
+      .then(() => {
+        const [from, to] = triangleClipPaths(
+          rect,
+          window.innerWidth,
+          window.innerHeight
+        );
+
+        root.animate(
+          { clipPath: [from, to] },
+          {
+            duration: 650,
+            easing: "cubic-bezier(.22,1,.36,1)",
+            pseudoElement: "::view-transition-new(root)",
+          }
+        );
+      })
+      .catch(() => undefined);
+
+    transition.finished.finally(() => {
+      delete root.dataset.magicuiThemeVt;
+      root.style.removeProperty("--magicui-theme-toggle-vt-duration");
+      transitionRef.current = false;
+    });
+  }, [mounted, nextMode, setTheme]);
 
   if (!mounted) {
     return (
@@ -36,20 +119,18 @@ export function ThemeToggle({ className }: { className?: string }) {
     );
   }
 
-  const current: Mode = (theme as Mode) ?? "system";
-  const idx = ORDER.indexOf(current);
-  const next: Mode = ORDER[(idx + 1) % ORDER.length];
-  const Icon = META[current === "system" ? (resolvedTheme as "light" | "dark") ?? "light" : current].icon;
-  const label = `Switch to ${META[next].label} mode (current: ${META[current].label})`;
+  const Icon = shownMode === "dark" ? Moon : Sun;
+  const label = `Switch to ${META[nextMode].label} mode (current: ${META[shownMode].label})`;
 
   return (
     <Button
+      ref={buttonRef}
       variant="ghost"
       size="icon"
       className={cn("h-8 w-8", className)}
       aria-label={label}
       title={label}
-      onClick={() => setTheme(next)}
+      onClick={handleToggle}
     >
       <Icon className="h-4 w-4" />
     </Button>

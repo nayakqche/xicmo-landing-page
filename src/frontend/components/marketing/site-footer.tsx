@@ -87,6 +87,12 @@ export function SiteFooter() {
           </div>
         </div>
 
+        <div className="mt-14 h-40 overflow-hidden md:h-56">
+          <div aria-hidden className="footer-xicmo-word select-none">
+            XICMO
+          </div>
+        </div>
+
         <div className="mt-12 flex flex-col-reverse items-start justify-between gap-4 border-t pt-8 md:flex-row md:items-center">
           <p className="text-xs text-muted-foreground">
             © {new Date().getFullYear()} {SITE_NAME}. All rights reserved.
