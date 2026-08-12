@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useRef, useSyncExternalStore } from "react";
 import { useTheme } from "next-themes";
 import { Monitor, Moon, Sun } from "lucide-react";
 import { flushSync } from "react-dom";
@@ -9,6 +9,12 @@ import { cn } from "@/shared/utils";
 
 const ORDER = ["light", "dark", "system"] as const;
 type Mode = (typeof ORDER)[number];
+
+const subscribe = () => () => undefined;
+
+function useMounted() {
+  return useSyncExternalStore(subscribe, () => true, () => false);
+}
 
 const META: Record<Mode, { label: string; icon: typeof Sun }> = {
   light: { label: "Light", icon: Sun },
@@ -41,11 +47,9 @@ function triangleClipPaths(
 /** Header toggle uses a triangle View Transition between light and dark. */
 export function ThemeToggle({ className }: { className?: string }) {
   const { setTheme, resolvedTheme } = useTheme();
-  const [mounted, setMounted] = useState(false);
+  const mounted = useMounted();
   const buttonRef = useRef<HTMLButtonElement>(null);
   const transitionRef = useRef(false);
-
-  useEffect(() => setMounted(true), []);
 
   const shownMode = (resolvedTheme as "light" | "dark") ?? "light";
   const nextMode = shownMode === "dark" ? "light" : "dark";
@@ -144,8 +148,7 @@ export function ThemeToggle({ className }: { className?: string }) {
  */
 export function ThemeToggleRow() {
   const { theme, setTheme, resolvedTheme } = useTheme();
-  const [mounted, setMounted] = useState(false);
-  useEffect(() => setMounted(true), []);
+  const mounted = useMounted();
 
   const current: Mode = mounted ? ((theme as Mode) ?? "system") : "system";
   const idx = ORDER.indexOf(current);
@@ -177,8 +180,7 @@ export function ThemeToggleRow() {
 /** Three-button picker for settings pages. */
 export function ThemeSelect() {
   const { theme, setTheme } = useTheme();
-  const [mounted, setMounted] = useState(false);
-  useEffect(() => setMounted(true), []);
+  const mounted = useMounted();
   if (!mounted) return null;
 
   return (

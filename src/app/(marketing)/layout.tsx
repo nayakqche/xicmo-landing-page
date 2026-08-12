@@ -6,18 +6,6 @@ import {
   MAX_PLAN_PRICE_USD,
 } from "@/shared/pricing";
 
-/**
- * Marketing shell: header, footer and the structured data.
- *
- * Identical to the main app's version except for one line — the base URL is
- * read straight from `process.env.NEXT_PUBLIC_APP_URL` instead of through the
- * app's validated `@/shared/env` module, which imports the whole server-side
- * environment schema and does not belong in a frontend-only repo.
- *
- * NOTE: `NEXT_PUBLIC_*` must be read as a literal member access for Next.js to
- * inline it into the build. Destructuring `process.env` leaves it undefined in
- * the browser.
- */
 const APP_URL = process.env.NEXT_PUBLIC_APP_URL || "https://xicmo.com";
 
 export default function MarketingLayout({
@@ -26,9 +14,6 @@ export default function MarketingLayout({
   children: React.ReactNode;
 }) {
   const base = APP_URL.replace(/\/$/, "");
-  // Organization + WebSite structured data on every marketing page —
-  // the single highest-leverage GEO/AEO signal for LLM crawlers and
-  // Google rich results. Facts only; nothing invented.
   const jsonLd = {
     "@context": "https://schema.org",
     "@graph": [

@@ -1,12 +1,11 @@
 import type { Config } from "tailwindcss";
+import animate from "tailwindcss-animate";
 
 const config: Config = {
   darkMode: "class",
   content: [
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/frontend/**/*.{js,ts,jsx,tsx,mdx}",
-    "./src/backend/**/*.{js,ts,jsx,tsx,mdx}",
-    "./src/integrations/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/shared/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
@@ -91,7 +90,7 @@ const config: Config = {
       },
     },
   },
-  plugins: [require("tailwindcss-animate")],
+  plugins: [animate],
 };
 
 export default config;

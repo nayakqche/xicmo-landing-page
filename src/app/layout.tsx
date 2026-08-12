@@ -2,20 +2,8 @@ import type { Metadata, Viewport } from "next";
 import { Inter, JetBrains_Mono } from "next/font/google";
 import { Toaster } from "sonner";
 import { ThemeProvider } from "@/app/theme-provider";
-import { AgentationHelper } from "@/frontend/components/agentation-helper";
 import { PRODUCT_LINE, SITE_NAME } from "@/shared/site";
 import "./globals.css";
-
-/**
- * Root layout for the standalone landing page.
- *
- * This is a TRIMMED copy of the layout in the main Xicmo app. The original
- * also mounts the auth session provider, analytics and cookie consent, all of
- * which reach into the application backend and none of which the landing page
- * needs. Keep those out of this repo: changes made here get carried back into
- * the main app by hand, and a stray backend import is the one thing that will
- * not survive the trip.
- */
 
 const inter = Inter({
   subsets: ["latin"],
@@ -54,7 +42,6 @@ export default function RootLayout({
       <body className={`${inter.variable} ${mono.variable} font-sans antialiased`}>
         <ThemeProvider>
           {children}
-          <AgentationHelper />
           <Toaster position="top-center" richColors />
         </ThemeProvider>
       </body>

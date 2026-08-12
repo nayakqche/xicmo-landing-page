@@ -144,24 +144,6 @@ export const AGENTS: AgentCard[] = [
   },
 ];
 
-export type Testimonial = {
-  quote: string;
-  author: string;
-  handle: string;
-};
-
-/** MVP placeholders — replace quote / author / handle in this file when you have real testimonials. */
-const PLACEHOLDER_TESTIMONIAL: Testimonial = {
-  quote:
-    "[Add a short customer quote here. Keep it specific and credible when you replace this.]",
-  author: "—",
-  handle: "—",
-};
-
-export const TESTIMONIALS: Testimonial[] = Array.from({ length: 12 }, () => ({
-  ...PLACEHOLDER_TESTIMONIAL,
-}));
-
 export type CostRow = {
   label: string;
   without: string;
