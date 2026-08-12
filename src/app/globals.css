@@ -98,6 +98,16 @@
     font-feature-settings: "rlig" 1, "calt" 1;
   }
 
+  ::selection {
+    background: hsl(var(--primary) / 0.32);
+    color: hsl(var(--foreground));
+  }
+
+  .dark ::selection {
+    background: hsl(var(--primary) / 0.45);
+    color: hsl(var(--foreground));
+  }
+
   /* Honor system preference: drop animation/transition durations to ~0.
      Skipping transforms entirely would break some Radix portals, so we just
      make them effectively instant. */
@@ -312,6 +322,57 @@
     font-size: 0.6875rem;
     font-weight: 700;
     box-shadow: 0 0.75rem 2rem hsl(var(--primary) / 0.24);
+  }
+
+  .card-spotlight {
+    isolation: isolate;
+  }
+
+  .card-spotlight__mask {
+    position: absolute;
+    inset: -1px;
+    z-index: 0;
+    pointer-events: none;
+    border-radius: inherit;
+    overflow: hidden;
+    opacity: 0;
+    background:
+      radial-gradient(
+        var(--spotlight-radius, 360px) circle at var(--spotlight-x, 50%) var(--spotlight-y, 50%),
+        hsl(var(--primary) / 0.24),
+        transparent 70%
+      ),
+      linear-gradient(135deg, hsl(var(--primary) / 0.08), rgb(217 70 239 / 0.08));
+    mask-image: radial-gradient(
+      var(--spotlight-radius, 360px) circle at var(--spotlight-x, 50%) var(--spotlight-y, 50%),
+      black,
+      transparent 82%
+    );
+    transition: opacity 260ms ease;
+  }
+
+  .card-spotlight:hover .card-spotlight__mask {
+    opacity: 1;
+  }
+
+  .card-spotlight::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+    border-radius: inherit;
+    background: radial-gradient(
+      24rem circle at var(--spotlight-x, 50%) var(--spotlight-y, 50%),
+      rgb(255 255 255 / 0.18),
+      transparent 68%
+    );
+    opacity: 0;
+    transition: opacity 260ms ease;
+  }
+
+  .card-spotlight:hover::after {
+    opacity: 1;
   }
 
   .channel-carousel {

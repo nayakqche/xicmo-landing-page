@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { Button } from "@/frontend/components/ui/button";
+import { CardSpotlight } from "@/frontend/components/ui/card-spotlight";
 import { SITE_NAME } from "@/shared/site";
 
 export function Cta() {
@@ -16,7 +17,7 @@ export function Cta() {
       />
 
       <div className="container">
-        <div className="mx-auto max-w-3xl rounded-3xl border bg-card p-10 text-center shadow-sm md:p-16">
+        <CardSpotlight className="mx-auto max-w-3xl rounded-3xl border bg-card p-10 text-center shadow-sm md:p-16">
           <p className="mb-3 text-xs font-medium uppercase tracking-widest text-primary">
             {SITE_NAME} for growth
           </p>
@@ -49,7 +50,7 @@ export function Cta() {
             <span>X / LinkedIn</span>
             <span>GSC / GA4</span>
           </div>
-        </div>
+        </CardSpotlight>
       </div>
     </section>
   );
